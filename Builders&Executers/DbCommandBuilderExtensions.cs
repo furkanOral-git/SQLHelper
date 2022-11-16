@@ -165,8 +165,8 @@ namespace SQLHelper.Builders_Executers
         }
         private static void DeleteOperation(this DbCommandBuilder command)
         {
-            var entity = command.Entity;
-            _builder.Replace("[-condition-]", $"Id={entity.Id}");
+            var id = command.Identifier;
+            _builder.Replace("[-condition-]", $"Id={id}");
         }
         private static void ConditionalSelectOperation(this DbCommandBuilder command)
         {

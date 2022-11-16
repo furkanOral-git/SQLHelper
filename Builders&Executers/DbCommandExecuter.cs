@@ -11,7 +11,7 @@ using SQLHelper.Enums_Structs;
 
 namespace SQLHelper.Builders_Executers
 {
-    public class DbCommandExecuter<TEntity> : BaseCommandExecuter<TEntity> where TEntity : Entity, new()
+    public class DbCommandExecuter<TEntity> : BaseCommandExecuter<TEntity> where TEntity : BaseEntity, new()
     {
 
 
@@ -56,7 +56,7 @@ namespace SQLHelper.Builders_Executers
         public void Delete(int id)
         {
             var command = new DbCommandBuilder(CommandType.Delete, this._tableName, this._columnNames);
-            command.Entity = new Entity() { Id = id };
+            command.Identifier = id;
             var commandStr = command.BuildForRequest();
             using (SqlCommand cmd = new SqlCommand(commandStr, _connection))
             {

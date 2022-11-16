@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace SQLHelper.Entities
 {
-    public class RelationalEntity : Entity
+    public abstract class BaseEntity 
     {
-        
+        public int Id { get; set; }
     }
 }

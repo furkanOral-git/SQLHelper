@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 using System.Data.SqlClient;
 using System.Data;
-using System.Text;
 using System.Text.RegularExpressions;
 using SQLHelper.Entities;
+using SQLHelper.TableManagers;
 
 namespace SQLHelper
 {
@@ -36,7 +31,7 @@ namespace SQLHelper
             return _instance;
         }
         public DbTableOperationManager<TEntity> Set<TEntity>()
-        where TEntity : Entity, new()
+        where TEntity : BaseEntity, new()
         {
             var dataRows = GetDataRows();
             var dataRow = GetMatchingDataRow(dataRows, typeof(TEntity));
@@ -49,9 +44,9 @@ namespace SQLHelper
             return manager;
         }
         public DbRelationalTableManager<TEntity, T2, TRegistryModel> Set<TEntity, T2, TRegistryModel>()
-        where TEntity : Entity, new()
-        where T2 : Entity, new()
-        where TRegistryModel : RelationalEntity, new()
+        where TEntity : BaseEntity, new()
+        where T2 : BaseEntity, new()
+        where TRegistryModel : BaseRelationalEntity, new()
         {
             var dataRows = GetDataRows();
             var dataRow = GetMatchingDataRow(dataRows, typeof(TEntity), typeof(T2));

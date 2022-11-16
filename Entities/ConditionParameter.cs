@@ -9,7 +9,7 @@ using SQLHelper.Enums_Structs;
 namespace SQLHelper.Entities
 {
     public class ConditionParameter<TEntity> : ConditionParameter
-    where TEntity : Entity, new()
+    where TEntity : BaseEntity, new()
     {
         public ConditionParameter(Expression<Func<TEntity, bool>> predicate, bool isSearchPattern) : base(isSearchPattern)
         {

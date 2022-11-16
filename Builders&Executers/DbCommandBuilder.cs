@@ -14,7 +14,8 @@ namespace SQLHelper.Builders_Executers
         public string TableName { get; init; }
         public CommandType CommandType { get; init; }
         public ConditionParameter ConditionParameter { get; internal set; }
-        public Entity Entity { get; internal set; }
+        public BaseEntity Entity { get; internal set; }
+        public int Identifier { get; set; }
         public string[] ColumnNames { get; init; }
 
         public DbCommandBuilder(CommandType commandType, string tableName, string[] columnNames)

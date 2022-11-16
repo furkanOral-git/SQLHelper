@@ -7,7 +7,7 @@ using SQLHelper.Entities;
 
 namespace SQLHelper.Builders_Executers
 {
-    public abstract class BaseCommandExecuter<TEntity> where TEntity : Entity, new()
+    public abstract class BaseCommandExecuter<TEntity> where TEntity : BaseEntity, new()
     {
         protected string _tableName;
         protected string[] _columnNames;
