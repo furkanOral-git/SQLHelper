@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using SQLHelper.Entities;
+using Core.Application.Entities;
+
 
 namespace SQLHelper.Builders_Executers
 {
-    public abstract class BaseCommandExecuter<TEntity> where TEntity : BaseEntity, new()
+    public abstract class BaseCommandExecuter<TEntity> where TEntity : Entity, new()
     {
         protected string _tableName;
         protected string[] _columnNames;

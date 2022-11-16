@@ -6,12 +6,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Application.Entities;
 using SQLHelper.Entities;
 using SQLHelper.Enums_Structs;
 
 namespace SQLHelper.Builders_Executers
 {
-    public class DbCommandExecuter<TEntity> : BaseCommandExecuter<TEntity> where TEntity : BaseEntity, new()
+    public class DbCommandExecuter<TEntity> : BaseCommandExecuter<TEntity> where TEntity : Entity, new()
     {
 
 
@@ -65,7 +66,6 @@ namespace SQLHelper.Builders_Executers
         }
         public void Update(TEntity newEntity)
         {
-            //"UPDATE Products SET Id=2004,CategoryId=2,Model='Rolex VC3',Price=1500,StockAmount=2, WHERE [-condition-];"
             var command = new DbCommandBuilder(CommandType.Update, this._tableName, this._columnNames);
             command.Entity = newEntity;
             var commandStr = command.BuildForRequest();

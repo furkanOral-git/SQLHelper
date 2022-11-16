@@ -6,12 +6,12 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SQLHelper;
 using SQLHelper.Builders_Executers;
-using SQLHelper.Entities;
+using Core.Application.Entities;
 
 
 namespace SQLHelper.TableManagers
 {
-    public class DbTableOperationManager<TEntity> : ITableOperationManager<TEntity> where TEntity : BaseEntity, new()
+    public class DbTableOperationManager<TEntity> : ITableOperationManager<TEntity> where TEntity : Entity, new()
     {
         protected SqlDbContext _context;
         protected DataRow _row;

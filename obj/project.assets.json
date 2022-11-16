@@ -130,6 +130,16 @@
             "rid": "win"
           }
         }
+      },
+      "Core.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Core.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.Application.dll": {}
+        }
       }
     }
   },
@@ -446,10 +456,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Core.Application/1.0.0": {
+      "type": "project",
+      "path": "../Core.Application/Core.Application.csproj",
+      "msbuildProject": "../Core.Application/Core.Application.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Core.Application >= 1.0.0",
       "System.Data.SqlClient >= 4.8.5"
     ]
   },
@@ -459,11 +475,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\Packages\\SQLHelper\\SQLHelper.csproj",
+      "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\SQLHelper\\SQLHelper.csproj",
       "projectName": "SQLHelper",
-      "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\Packages\\SQLHelper\\SQLHelper.csproj",
+      "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\SQLHelper\\SQLHelper.csproj",
       "packagesPath": "C:\\Users\\Furkan Oral\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\Packages\\SQLHelper\\obj\\",
+      "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\SQLHelper\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Furkan Oral\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -477,7 +493,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\Core.Application\\Core.Application.csproj": {
+              "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\Core.Application\\Core.Application.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

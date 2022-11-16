@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using SQLHelper.Entities;
+using Core.Application.Entities;
 
 namespace SQLHelper.TableManagers
 {
     public interface ITableOperationManager<TEntity> : ITableOperationManager
-    where TEntity : BaseEntity, new()
+    where TEntity : Entity, new()
     {
         public void Insert(TEntity entity);
         public void InsertAll(List<TEntity> entities);

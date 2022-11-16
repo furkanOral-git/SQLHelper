@@ -5,11 +5,13 @@ using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using SQLHelper.Enums_Structs;
+using Core.Application.Entities;
+
 
 namespace SQLHelper.Entities
 {
     public class ConditionParameter<TEntity> : ConditionParameter
-    where TEntity : BaseEntity, new()
+    where TEntity : Entity, new()
     {
         public ConditionParameter(Expression<Func<TEntity, bool>> predicate, bool isSearchPattern) : base(isSearchPattern)
         {
