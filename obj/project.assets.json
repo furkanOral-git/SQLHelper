@@ -459,11 +459,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\SQLHelper.csproj",
+      "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\Packages\\SQLHelper\\SQLHelper.csproj",
       "projectName": "SQLHelper",
-      "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\SQLHelper.csproj",
+      "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\Packages\\SQLHelper\\SQLHelper.csproj",
       "packagesPath": "C:\\Users\\Furkan Oral\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\obj\\",
+      "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\Packages\\SQLHelper\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Furkan Oral\\AppData\\Roaming\\NuGet\\NuGet.Config"

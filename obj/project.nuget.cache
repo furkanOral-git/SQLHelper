@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HE6TiMvVN+eADxH0cmO9iz7Df+dl3fNbhoWPsob25iHurtcYtCk791fXZpZdt18fNojyKslibbcLdE3J0mnflA==",
+  "dgSpecHash": "Xp888pmhTxuvMhU8Fdpfe2u1u5xTzXxh6y6SbSBal40N3+sLjcWivcXRblWxsyq0+4p2jZqsaa7FhwvoSh/EOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\SQLHelper.csproj",
+  "projectFilePath": "C:\\Users\\Furkan Oral\\Desktop\\Packages\\SQLHelper\\SQLHelper.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Furkan Oral\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Furkan Oral\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
