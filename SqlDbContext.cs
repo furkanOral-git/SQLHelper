@@ -14,7 +14,7 @@ namespace SQLHelper
         private static SqlDbContext _instance;
         private SqlConnection _connection;
 
-        private SqlDbContext()
+        public SqlDbContext()
         {
             var connectionString = GetConnectionString("Sql");
             _connection = new(connectionString);

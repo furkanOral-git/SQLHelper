@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2TuG+T+JtbzMUJu2mmVSMfbTQOTTqv27EC4BnbA/h4eO9B9UisO1AxmdMgXZNpEG6VM5q6QMqwlrvCP8HoeY8Q==",
+  "dgSpecHash": "3NP/21n1VFw2wGeeoIvtRUuiEobclPsPsMAXOtVtUJZtkMuco26cNIbW8SpppCwGEMApqeANsnxR7t47lPV6iw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\SQLHelper.csproj",
+  "projectFilePath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\SQLHelper.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Furkan Oral\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
     "C:\\Users\\Furkan Oral\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
