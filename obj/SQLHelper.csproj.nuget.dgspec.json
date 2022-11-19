@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\SQLHelper\\SQLHelper.csproj": {}
+    "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\SQLHelper.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\Core.Application\\Core.Application.csproj": {
+    "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\SQLHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\Core.Application\\Core.Application.csproj",
-        "projectName": "Core.Application",
-        "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\Core.Application\\Core.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\SQLHelper.csproj",
+        "projectName": "SQLHelper",
+        "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\SQLHelper.csproj",
         "packagesPath": "C:\\Users\\Furkan Oral\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\Core.Application\\obj\\",
+        "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\SQLHelper\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Furkan Oral\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,63 +37,15 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\SQLHelper\\SQLHelper.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\SQLHelper\\SQLHelper.csproj",
-        "projectName": "SQLHelper",
-        "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\SQLHelper\\SQLHelper.csproj",
-        "packagesPath": "C:\\Users\\Furkan Oral\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\SQLHelper\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\Furkan Oral\\AppData\\Roaming\\NuGet\\NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\Core.Application\\Core.Application.csproj": {
-                "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\CorePackages\\Core.Application\\Core.Application.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"

@@ -2,6 +2,8 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Text.RegularExpressions;
 using Core.Application.Entities;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 using SQLHelper.TableManagers;
 
 namespace SQLHelper
@@ -12,24 +14,22 @@ namespace SQLHelper
         private static SqlDbContext _instance;
         private SqlConnection _connection;
 
-        private SqlDbContext(string connectionString)
+        private SqlDbContext()
         {
+            var connectionString = GetConnectionString("Sql");
             _connection = new(connectionString);
             _managers = new List<ITableOperationManager>();
 
+        }
+        private string GetConnectionString(string conname)
+        {
+            return new ConfigurationBuilder().AddJsonFile(Directory.GetCurrentDirectory() + @"\" + "appsettings.json").Build().GetConnectionString(conname);
         }
         internal SqlConnection GetConnection()
         {
             return _connection;
         }
-        public static SqlDbContext GetContext(string connectionString)
-        {
-            if (_instance == null)
-            {
-                _instance = new SqlDbContext(connectionString);
-            }
-            return _instance;
-        }
+
         public DbTableOperationManager<TEntity> Set<TEntity>()
         where TEntity : Entity, new()
         {
@@ -43,21 +43,7 @@ namespace SQLHelper
             _managers.Add(manager);
             return manager;
         }
-        // public DbRelationalTableManager<TEntity, T2, TRegistryModel> Set<TEntity, T2, TRegistryModel>()
-        // where TEntity : Entity, new()
-        // where T2 : Entity, new()
-        // where TRegistryModel : BaseRelationalEntity, new()
-        // {
-        //     var dataRows = GetDataRows();
-        //     var dataRow = GetMatchingDataRow(dataRows, typeof(TEntity), typeof(T2));
-        //     if (_managers.Any(m => m.ConcernType == typeof(TRegistryModel)))
-        //     {
-        //         return (DbRelationalTableManager<TEntity, T2, TRegistryModel>)_managers.SingleOrDefault(m => m.ConcernType == typeof(TRegistryModel));
-        //     }
-        //     var manager = new DbRelationalTableManager<TEntity, T2, TRegistryModel>(_instance, dataRow);
-        //     _managers.Add(manager);
-        //     return manager;
-        // }
+        
         private List<DataRow> GetDataRows()
         {
             List<DataRow> dataRows = new();
