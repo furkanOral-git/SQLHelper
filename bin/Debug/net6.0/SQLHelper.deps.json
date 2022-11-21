@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "SQLHelper/1.0.0": {
         "dependencies": {
-          "Core.Application": "1.0.0",
+          "Core.Domain": "1.0.0",
           "Microsoft.Extensions.Configuration": "7.0.0",
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "System.Data.SqlClient": "4.8.5"
@@ -220,9 +220,9 @@
           }
         }
       },
-      "Core.Application/1.0.0": {
+      "Core.Domain/1.0.0": {
         "runtime": {
-          "Core.Application.dll": {}
+          "Core.Domain.dll": {}
         }
       }
     }
@@ -373,7 +373,7 @@
       "path": "system.text.json/7.0.0",
       "hashPath": "system.text.json.7.0.0.nupkg.sha512"
     },
-    "Core.Application/1.0.0": {
+    "Core.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

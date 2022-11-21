@@ -1,10 +1,10 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Text.RegularExpressions;
-using Core.Application.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using SQLHelper.TableManagers;
+using Core.Domain.Entities;
 
 namespace SQLHelper
 {

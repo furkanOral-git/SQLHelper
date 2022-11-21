@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Application.Entities;
-
+using Core.Domain.Entities;
 
 namespace SQLHelper.Builders_Executers
 {

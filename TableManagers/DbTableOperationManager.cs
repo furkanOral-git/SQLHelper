@@ -4,10 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using SQLHelper;
 using SQLHelper.Builders_Executers;
-using Core.Application.Entities;
-
+using Core.Domain.Entities;
 
 namespace SQLHelper.TableManagers
 {

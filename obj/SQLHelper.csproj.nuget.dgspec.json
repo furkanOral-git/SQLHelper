@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\SQLHelper.csproj": {}
+    "C:\\Users\\Furkan Oral\\Desktop\\Sql\\SQLHelper\\SQLHelper.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\Core.Application\\Core.Application.csproj": {
+    "C:\\Users\\Furkan Oral\\Desktop\\Sql\\Core.Domain\\Core.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\Core.Application\\Core.Application.csproj",
-        "projectName": "Core.Application",
-        "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\Core.Application\\Core.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\Core.Domain\\Core.Domain.csproj",
+        "projectName": "Core.Domain",
+        "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\Core.Domain\\Core.Domain.csproj",
         "packagesPath": "C:\\Users\\Furkan Oral\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\Core.Application\\obj\\",
+        "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\Core.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Furkan Oral\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -56,14 +56,14 @@
         }
       }
     },
-    "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\SQLHelper.csproj": {
+    "C:\\Users\\Furkan Oral\\Desktop\\Sql\\SQLHelper\\SQLHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\SQLHelper.csproj",
+        "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\SQLHelper\\SQLHelper.csproj",
         "projectName": "SQLHelper",
-        "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\SQLHelper.csproj",
+        "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\SQLHelper\\SQLHelper.csproj",
         "packagesPath": "C:\\Users\\Furkan Oral\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\obj\\",
+        "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\SQLHelper\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Furkan Oral\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -78,8 +78,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\Core.Application\\Core.Application.csproj": {
-                "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\Core.Application\\Core.Application.csproj"
+              "C:\\Users\\Furkan Oral\\Desktop\\Sql\\Core.Domain\\Core.Domain.csproj": {
+                "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\Core.Domain\\Core.Domain.csproj"
               }
             }
           }

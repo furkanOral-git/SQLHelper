@@ -308,14 +308,14 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
-      "Core.Application/1.0.0": {
+      "Core.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
-          "bin/placeholder/Core.Application.dll": {}
+          "bin/placeholder/Core.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Core.Application.dll": {}
+          "bin/placeholder/Core.Domain.dll": {}
         }
       }
     }
@@ -979,15 +979,15 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Core.Application/1.0.0": {
+    "Core.Domain/1.0.0": {
       "type": "project",
-      "path": "../Core.Application/Core.Application.csproj",
-      "msbuildProject": "../Core.Application/Core.Application.csproj"
+      "path": "../Core.Domain/Core.Domain.csproj",
+      "msbuildProject": "../Core.Domain/Core.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Core.Application >= 1.0.0",
+      "Core.Domain >= 1.0.0",
       "Microsoft.Extensions.Configuration >= 7.0.0",
       "Microsoft.Extensions.Configuration.Json >= 7.0.0",
       "System.Data.SqlClient >= 4.8.5"
@@ -999,11 +999,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\SQLHelper.csproj",
+      "projectUniqueName": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\SQLHelper\\SQLHelper.csproj",
       "projectName": "SQLHelper",
-      "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\SQLHelper.csproj",
+      "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\SQLHelper\\SQLHelper.csproj",
       "packagesPath": "C:\\Users\\Furkan Oral\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\SQLHelper\\obj\\",
+      "outputPath": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\SQLHelper\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Furkan Oral\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1018,8 +1018,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\Core.Application\\Core.Application.csproj": {
-              "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\SqlProject\\Core.Application\\Core.Application.csproj"
+            "C:\\Users\\Furkan Oral\\Desktop\\Sql\\Core.Domain\\Core.Domain.csproj": {
+              "projectPath": "C:\\Users\\Furkan Oral\\Desktop\\Sql\\Core.Domain\\Core.Domain.csproj"
             }
           }
         }

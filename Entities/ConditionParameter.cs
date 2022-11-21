@@ -5,8 +5,7 @@ using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using SQLHelper.Enums_Structs;
-using Core.Application.Entities;
-
+using Core.Domain.Entities;
 
 namespace SQLHelper.Entities
 {
