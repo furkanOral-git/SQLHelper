@@ -1,0 +1,12 @@
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\bin\Debug\net6.0\SQLHelper.deps.json
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\bin\Debug\net6.0\SQLHelper.dll
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\bin\Debug\net6.0\SQLHelper.pdb
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\SQLHelper.csproj.AssemblyReference.cache
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\SQLHelper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\SQLHelper.AssemblyInfoInputs.cache
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\SQLHelper.AssemblyInfo.cs
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\SQLHelper.csproj.CoreCompileInputs.cache
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\SQLHelper.dll
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\refint\SQLHelper.dll
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\SQLHelper.pdb
+C:\Users\Furkan Oral\Desktop\SQLHelper\src\obj\Debug\net6.0\ref\SQLHelper.dll
