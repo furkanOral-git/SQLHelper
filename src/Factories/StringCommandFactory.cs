@@ -8,7 +8,7 @@ namespace SQLHelper.Factories
     {
 
         //INSERT INTO {TABLE} ({entity.columnNames}) values (entity.columnValues)
-        internal static string CreateInsertCommand<TEntity>(TEntity entity, HelperTable<TEntity> table)
+        public static string CreateInsertCommand<TEntity>(TEntity entity, HelperTable<TEntity> table)
         where TEntity : class, IDbEntity
         {
             StringBuilder command = new StringBuilder();
@@ -25,7 +25,7 @@ namespace SQLHelper.Factories
             return command.ToString();
         }
         //UPDATE {TABLE} SET {entity.Column}={entity.Column.Value}, ... WHERE {entity.Column}={entity.Column.Value}
-        internal static string CreateUpdateCommand<TEntity>(TEntity entity, HelperTable<TEntity> table)
+        public static string CreateUpdateCommand<TEntity>(TEntity entity, HelperTable<TEntity> table)
         where TEntity : class, IDbEntity
         {
             StringBuilder command = new StringBuilder();
@@ -56,13 +56,23 @@ namespace SQLHelper.Factories
             return command.ToString();
         }
         //SELECT * FROM WHERE {entity.Column}={entity.Column.Value} ...
-        internal static string CreateGetbyCommand<TEntity>(Expression<Func<TEntity, bool>>? predicate, HelperTable<TEntity> table)
+        public static string CreateGetbyCommand<TEntity>(Expression<Func<TEntity, bool>> predicate, HelperTable<TEntity> table)
         where TEntity : class, IDbEntity
         {
-            return default;
+            StringBuilder command = new StringBuilder();
+            var predicateBodyStructure = table.GetPredicateBodyStructure(predicate);
+            string conditions = "";
+            predicateBodyStructure.ResolveBody(ref conditions);
+            command = command.AppendFormat
+            (
+                "SELECT * FROM {0} WHERE {1}"
+                , table.TableName
+                , conditions
+            );
+            return command.ToString();
         }
         //SELECT * FROM WHERE {entity.Column} LIKE {pattern}%
-        internal static string CreateSearchCommand<TEntity>(HelperTable<TEntity> table)
+        public static string CreateSearchCommand<TEntity>(Expression<Func<TEntity, bool>> predicate, HelperTable<TEntity> table)
         where TEntity : class, IDbEntity
         {
             return default;
