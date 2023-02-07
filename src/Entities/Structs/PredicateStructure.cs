@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
-using SQLHelper.Entities.Structs;
+
 
 namespace SQLHelper.Entities.Structs
 {
@@ -20,6 +15,11 @@ namespace SQLHelper.Entities.Structs
             _node = node;
             _right = right;
         }
+        // Add (+)
+        // Divide (/)
+        // Modulo (%)
+        // Subtract (-)
+        // Multiply (*)
         internal static string ResolveNode(ExpressionType node)
         {
             switch (node)
@@ -40,6 +40,16 @@ namespace SQLHelper.Entities.Structs
                     return "<=";
                 case ExpressionType.LessThan:
                     return "<";
+                case ExpressionType.Add:
+                    return "+";
+                case ExpressionType.Subtract:
+                    return "-";
+                case ExpressionType.Divide:
+                    return "/";
+                case ExpressionType.Modulo:
+                    return "%";
+                case ExpressionType.Multiply:
+                    return "*";
                 default:
                     return "";
 

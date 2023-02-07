@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq.Expressions;
-using System.Reflection.Metadata;
-using System.Security.AccessControl;
-using System.Text;
+using System.Reflection.Metadata.Ecma335;
 using SQLHelper.Entities.Context;
 
 namespace SQLHelper.Entities.Structs
@@ -16,7 +11,6 @@ namespace SQLHelper.Entities.Structs
         private readonly ExpressionType _nodeType;
         private readonly Expression? _right;
 
-        // exp : p => p.Name == "Bardak" && p.Price == 10000;
         public PredicateBodyStructure(Expression<Func<TEntity, bool>> predicate) : this((BinaryExpression)predicate.Body)
         {
 
@@ -27,10 +21,16 @@ namespace SQLHelper.Entities.Structs
             _left = binaryExpression.Left;
             _right = binaryExpression.Right;
         }
+        /*
+            Eklenilecek yeni özellikler: 
 
+            **Dört işlem kullanılarak sorgu cümlesi oluşturabilme,
+            **Searching için Contains,StartsWith veya EndsWith özelliklerini kullanarak sorgu cümlesi oluşturabilme,
 
+        */
         public void ResolveBody(ref string str)
         {
+
             if (_left is BinaryExpression)
             {
                 var leftBodyStruct = new PredicateBodyStructure<TEntity>((BinaryExpression)_left);
@@ -42,10 +42,18 @@ namespace SQLHelper.Entities.Structs
                 var rightBodyStruct = new PredicateBodyStructure<TEntity>((BinaryExpression)_right);
                 rightBodyStruct.ResolveBody(ref str);
             }
+            // Karşılaştırma için örneğin; eşit mi değil mi sorgusu için.
             if (_left is MemberExpression && _right is ConstantExpression)
             {
                 var predicateStructure = new PredicateStructure((MemberExpression)_left, _nodeType, (ConstantExpression)_right);
                 str += predicateStructure.ToString();
+                return;
+            }
+            if (_left is MethodCallExpression && _right is ConstantExpression)
+            {
+                var patternStructure = new PatternStructure((MethodCallExpression)_left, (ConstantExpression)_right);
+                str += patternStructure.ToString();
+                return;
             }
 
         }
