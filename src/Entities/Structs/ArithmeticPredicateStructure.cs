@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -27,44 +28,46 @@ namespace SQLHelper.Entities.Structs
             switch (expType)
             {
                 case ExpressionType.Add:
-                    return "+";
+                    return " + ";
                 case ExpressionType.Subtract:
-                    return "-";
+                    return " - ";
                 case ExpressionType.Divide:
-                    return "/";
+                    return " / ";
                 case ExpressionType.Modulo:
-                    return "%";
+                    return " % ";
                 case ExpressionType.Multiply:
-                    return "*";
+                    return " * ";
                 default:
                     return "";
             }
         }
-        private (string leftOfArithmetic, string nodeOfArithmetic, string? rightOfArithmetic)? ResolvePredicate()
+        private (string? leftOfArithmetic, string nodeOfArithmetic, string? rightOfArithmetic)? ResolvePredicate()
         {
-            if (_arithmeticExp.Left is MemberExpression && _arithmeticExp.Right is ConstantExpression)
+            string left = "";
+            string node = ResolveNode(_arithmeticExp.NodeType);
+            string right = "";
+            
+            if (_arithmeticExp.Left is MemberExpression)
             {
                 var memExp = (MemberExpression)_arithmeticExp.Left;
+                left = memExp.Member.Name;
+            }
+            if (_arithmeticExp.Left is ConstantExpression)
+            {
+                var constExp = (ConstantExpression)_arithmeticExp.Left;
+                left = constExp.Value.ToString();
+            }
+            if (_arithmeticExp.Right is MemberExpression)
+            {
+                var memExp = (MemberExpression)_arithmeticExp.Right;
+                right = memExp.Member.Name;
+            }
+            if (_arithmeticExp.Right is ConstantExpression)
+            {
                 var constExp = (ConstantExpression)_arithmeticExp.Right;
-
-                var methodName = memExp.Member.Name;
-                var node = ResolveNode(_arithmeticExp.NodeType);
-                var rightConst = constExp.Value?.ToString();
-
-                return (methodName, node, rightConst);
+                right = constExp.Value.ToString();
             }
-            if (_arithmeticExp.Left is MemberExpression && _arithmeticExp.Right is MemberExpression)
-            {
-                var memExp = (MemberExpression)_arithmeticExp.Left;
-                var rightMemExp = (MemberExpression)_arithmeticExp.Right;
-
-                var methodName = memExp.Member.Name;
-                var node = ResolveNode(_arithmeticExp.NodeType);
-                var rightMethodName = rightMemExp.Member.Name;
-
-                return (methodName, node, rightMethodName);
-            }
-            return null;
+            return (left, node, right);
         }
         public override string ToString()
         {
