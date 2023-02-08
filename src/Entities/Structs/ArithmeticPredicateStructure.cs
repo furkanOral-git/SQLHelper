@@ -43,32 +43,35 @@ namespace SQLHelper.Entities.Structs
         }
         private (string? leftOfArithmetic, string nodeOfArithmetic, string? rightOfArithmetic)? ResolvePredicate()
         {
-            string left = "";
+            string left = ResolveExpression(_arithmeticExp.Left);
             string node = ResolveNode(_arithmeticExp.NodeType);
-            string right = "";
-            
-            if (_arithmeticExp.Left is MemberExpression)
-            {
-                var memExp = (MemberExpression)_arithmeticExp.Left;
-                left = memExp.Member.Name;
-            }
-            if (_arithmeticExp.Left is ConstantExpression)
-            {
-                var constExp = (ConstantExpression)_arithmeticExp.Left;
-                left = constExp.Value.ToString();
-            }
-            if (_arithmeticExp.Right is MemberExpression)
-            {
-                var memExp = (MemberExpression)_arithmeticExp.Right;
-                right = memExp.Member.Name;
-            }
-            if (_arithmeticExp.Right is ConstantExpression)
-            {
-                var constExp = (ConstantExpression)_arithmeticExp.Right;
-                right = constExp.Value.ToString();
-            }
+            string right = ResolveExpression(_arithmeticExp.Right);
+
             return (left, node, right);
         }
+        private string ResolveExpression(Expression exp)
+        {
+            if (exp is MemberExpression)
+            {
+                var memExp = (MemberExpression)exp;
+                return memExp.Member.Name;
+            }
+            else if (exp is ConstantExpression)
+            {
+                var constExp = (ConstantExpression)exp;
+                return constExp.Value?.ToString() ?? "";
+            }
+            else if (exp is UnaryExpression)
+            {
+                var unaryExp = (UnaryExpression)exp;
+                return ResolveExpression(unaryExp.Operand);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         public override string ToString()
         {
             var constValue = _constExp.Value?.ToString();
