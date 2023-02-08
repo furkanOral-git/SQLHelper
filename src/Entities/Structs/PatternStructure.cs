@@ -17,11 +17,15 @@ namespace SQLHelper.Entities.Structs
         }
         public override string ToString()
         {
-            string notOrLike(bool b) => (b == false) ? "NOT" : string.Empty;
-
+            string notOrLike(bool b) => (b == false) ? "NOT " : "";
+            MemberExpression? memExp = null;
             var values = ResolvePattern();
-
-            return notOrLike(values.notOrLike) + " LIKE " + ResolvePatternNode(values.methodName, values.pattern);
+            if (_call.Object is MemberExpression)
+            {
+                memExp = (MemberExpression)_call.Object;
+            }
+            var propertyName = memExp?.Member.Name;
+            return propertyName + " " + notOrLike(values.notOrLike) + "LIKE " + ResolvePatternNode(values.methodName, values.pattern);
         }
         private string ResolvePatternNode(string methodName, string? pattern)
         {
