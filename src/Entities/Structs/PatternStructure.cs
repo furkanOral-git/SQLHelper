@@ -17,7 +17,7 @@ namespace SQLHelper.Entities.Structs
         }
         public override string ToString()
         {
-            string notOrLike(bool b) => (b == true) ? "NOT" : string.Empty;
+            string notOrLike(bool b) => (b == false) ? "NOT" : string.Empty;
 
             var values = ResolvePattern();
 
