@@ -3,23 +3,19 @@ using System.Linq.Expressions;
 
 namespace SQLHelper.Entities.Structs
 {
-    internal ref struct PredicateStructure
+    internal ref struct ConditionalPredicateStructure
     {
         private readonly MemberExpression _left;
         private readonly ExpressionType _node;
         private readonly ConstantExpression _right;
 
-        public PredicateStructure(MemberExpression left, ExpressionType node, ConstantExpression right)
+        public ConditionalPredicateStructure(MemberExpression left, ExpressionType node, ConstantExpression right)
         {
             _left = left;
             _node = node;
             _right = right;
         }
-        // Add (+)
-        // Divide (/)
-        // Modulo (%)
-        // Subtract (-)
-        // Multiply (*)
+
         internal static string ResolveNode(ExpressionType node)
         {
             switch (node)
@@ -29,27 +25,17 @@ namespace SQLHelper.Entities.Structs
                 case ExpressionType.OrElse:
                     return " OR ";
                 case ExpressionType.GreaterThanOrEqual:
-                    return ">=";
+                    return " >= ";
                 case ExpressionType.GreaterThan:
-                    return ">";
+                    return " > ";
                 case ExpressionType.Equal:
-                    return "=";
+                    return " = ";
                 case ExpressionType.NotEqual:
-                    return "<>";
+                    return " <> ";
                 case ExpressionType.LessThanOrEqual:
-                    return "<=";
+                    return " <= ";
                 case ExpressionType.LessThan:
-                    return "<";
-                case ExpressionType.Add:
-                    return "+";
-                case ExpressionType.Subtract:
-                    return "-";
-                case ExpressionType.Divide:
-                    return "/";
-                case ExpressionType.Modulo:
-                    return "%";
-                case ExpressionType.Multiply:
-                    return "*";
+                    return " < ";
                 default:
                     return "";
 
@@ -58,13 +44,13 @@ namespace SQLHelper.Entities.Structs
         public override string ToString()
         {
             var values = ResolvePredicate();
-            var value = new ColumnValue(values.Item3);
-            return values.Item1 + values.Item2 + value.ToString();
+            return values.Item1 + values.Item2 + values.Item3;
         }
-        public Tuple<string, string, object> ResolvePredicate()
+        public Tuple<string, string, string> ResolvePredicate()
         {
             var node = ResolveNode(_node);
-            return new Tuple<string, string, object>(_left.Member.Name, node, _right.Value);
+            var value = new ColumnValue(_right.Value);
+            return new Tuple<string, string, string>(_left.Member.Name, node, value.ToString());
         }
 
 

@@ -1,5 +1,4 @@
 using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
 using SQLHelper.Entities.Context;
 
 namespace SQLHelper.Entities.Structs
@@ -25,30 +24,36 @@ namespace SQLHelper.Entities.Structs
             Eklenilecek yeni özellikler: 
 
             **Dört işlem kullanılarak sorgu cümlesi oluşturabilme,
-            **Searching için Contains,StartsWith veya EndsWith özelliklerini kullanarak sorgu cümlesi oluşturabilme,
+            Eklendi : **Searching için Contains,StartsWith veya EndsWith özelliklerini kullanarak sorgu cümlesi oluşturabilme,
 
         */
         public void ResolveBody(ref string str)
         {
 
-            if (_left is BinaryExpression)
+            if (_left is BinaryExpression && _right is BinaryExpression)
             {
                 var leftBodyStruct = new PredicateBodyStructure<TEntity>((BinaryExpression)_left);
                 leftBodyStruct.ResolveBody(ref str);
-                str += PredicateStructure.ResolveNode(_nodeType);
-            }
-            if (_right is BinaryExpression)
-            {
+                str += ConditionalPredicateStructure.ResolveNode(_nodeType);
+
                 var rightBodyStruct = new PredicateBodyStructure<TEntity>((BinaryExpression)_right);
                 rightBodyStruct.ResolveBody(ref str);
+            }
+            // Aritmetik işlemler ile karşılaştırma sorgusu için
+            if (_left is BinaryExpression && IsArithmeticNode(_left.NodeType) && _right is ConstantExpression)
+            {
+                var predicateStructure = new ArithmeticPredicateStructure((BinaryExpression)_left, _nodeType, (ConstantExpression)_right);
+                str += predicateStructure.ToString();
+                return;
             }
             // Karşılaştırma için örneğin; eşit mi değil mi sorgusu için.
             if (_left is MemberExpression && _right is ConstantExpression)
             {
-                var predicateStructure = new PredicateStructure((MemberExpression)_left, _nodeType, (ConstantExpression)_right);
+                var predicateStructure = new ConditionalPredicateStructure((MemberExpression)_left, _nodeType, (ConstantExpression)_right);
                 str += predicateStructure.ToString();
                 return;
             }
+            // Contains, StartsWith ve EndsWith metodları ile pattern arama için
             if (_left is MethodCallExpression && _right is ConstantExpression)
             {
                 var patternStructure = new PatternStructure((MethodCallExpression)_left, (ConstantExpression)_right);
@@ -56,6 +61,17 @@ namespace SQLHelper.Entities.Structs
                 return;
             }
 
+        }
+        private bool IsArithmeticNode(ExpressionType nodeType)
+        {
+            return
+            (
+                nodeType is ExpressionType.Add
+            || nodeType is ExpressionType.Divide
+            || nodeType is ExpressionType.Multiply
+            || nodeType is ExpressionType.Subtract
+            || nodeType is ExpressionType.Modulo
+            ) ? true : false;
         }
 
 
