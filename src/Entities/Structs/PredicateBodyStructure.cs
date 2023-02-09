@@ -3,7 +3,7 @@ using SQLHelper.Entities.Context;
 
 namespace SQLHelper.Entities.Structs
 {
-    public ref struct PredicateBodyStructure<TEntity>
+    internal ref struct PredicateBodyStructure<TEntity>
     where TEntity : class, IDbEntity
     {
         private readonly Expression? _left;

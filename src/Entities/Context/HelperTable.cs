@@ -13,14 +13,8 @@ namespace SQLHelper.Entities.Context
 
         internal HelperTable(SqlHelperContext context) : base(context)
         {
-            TableName = SetTableName();
-            ColumnNames = SetColumnNames();
             Repository = new BaseRepository<TEntity>(this);
-        }
-        //For Test
-        public HelperTable(string tableName) : base(tableName)
-        {
-            
+            TableName = SetTableName();
         }
         internal EntityStructure GetEntityStructure(TEntity entity)
         {

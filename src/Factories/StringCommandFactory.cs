@@ -4,7 +4,7 @@ using SQLHelper.Entities.Context;
 
 namespace SQLHelper.Factories
 {
-    public class StringCommandFactory
+    internal class StringCommandFactory
     {
 
         //INSERT INTO {TABLE} ({entity.columnNames}) values (entity.columnValues)
