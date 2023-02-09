@@ -1,6 +1,4 @@
-
 using System.Data.SqlClient;
-using System.Reflection.Metadata;
 
 namespace SQLHelper
 {
@@ -9,12 +7,13 @@ namespace SQLHelper
         private readonly SqlConnection _connection;
         internal SqlConnection GetConnection() => _connection;
         public string ConnectionString { internal get => ConnectionString; set { ConnectionString = value; } }
-        
+
         public SqlHelperContext()
         {
             _connection = new SqlConnection();
+            this.Configure();
         }
-
+        public virtual void Configure() { }
         internal void Connect()
         {
             if (_connection.State == System.Data.ConnectionState.Closed)
