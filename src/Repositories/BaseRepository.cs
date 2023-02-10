@@ -6,7 +6,7 @@ using SQLHelper.Factories;
 
 namespace SQLHelper.Repositories
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity>
+    internal class BaseRepository<TEntity> : IBaseRepository<TEntity>
     where TEntity : class, IDbEntity
     {
         private readonly HelperTable<TEntity> _table;
@@ -16,7 +16,7 @@ namespace SQLHelper.Repositories
             _table = table;
             _connection = table.Context.GetConnection();
         }
-        public void Add(TEntity entity)
+        public void Insert(TEntity entity)
         {
             var command = StringCommandFactory.CreateInsertCommand<TEntity>(entity, _table);
             using (var cmd = new SqlCommand(command, _connection))
@@ -25,7 +25,7 @@ namespace SQLHelper.Repositories
             }
         }
 
-        public void DeleteBy(Expression<Func<TEntity, bool>> predicate)
+        public void RemoveBy(Expression<Func<TEntity, bool>> predicate)
         {
             var command = StringCommandFactory.CreateRemoveByCommand<TEntity>(predicate, _table);
             using (var cmd = new SqlCommand(command, _connection))
@@ -54,9 +54,14 @@ namespace SQLHelper.Repositories
             return default;
         }
 
-        public IList<TEntity> SearchLike(Expression<Func<TEntity, string, bool>> predicate)
+        public IList<TEntity> SearchLike(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            var command = StringCommandFactory.CreateSearchCommand<TEntity>(predicate, _table);
+            using (var cmd = new SqlCommand(command, _connection))
+            {
+                //read datas
+            }
+            return default;
         }
 
         public void Update(TEntity entity)
