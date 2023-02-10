@@ -11,7 +11,7 @@ namespace SQLHelper.Entities.Context
     {
         internal BaseRepository<TEntity> Repository { get; init; }
 
-        internal HelperTable(SqlHelperContext context) : base(context)
+        public HelperTable(SqlHelperContext context) : base(context)
         {
             Repository = new BaseRepository<TEntity>(this);
             TableName = SetTableName();
@@ -24,8 +24,6 @@ namespace SQLHelper.Entities.Context
         {
             return new PredicateBodyStructure<TEntity>(predicate);
         }
-
-
 
     }
 }

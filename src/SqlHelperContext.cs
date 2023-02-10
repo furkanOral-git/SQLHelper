@@ -6,14 +6,14 @@ namespace SQLHelper
     {
         private readonly SqlConnection _connection;
         internal SqlConnection GetConnection() => _connection;
-        public string ConnectionString { internal get => ConnectionString; set { ConnectionString = value; } }
-
-        public SqlHelperContext()
+        private readonly string _connectionString;
+        internal string ConnectionString { get => _connectionString; }
+        public SqlHelperContext(string connectionString)
         {
             _connection = new SqlConnection();
-            this.Configure();
+            _connectionString = connectionString;
         }
-        public virtual void Configure() { }
+        
         internal void Connect()
         {
             if (_connection.State == System.Data.ConnectionState.Closed)
