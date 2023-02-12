@@ -14,8 +14,9 @@ namespace SQLHelper.Entities.Context
         public HelperTable(SqlHelperContext context) : base(context)
         {
             Repository = new BaseRepository<TEntity>(this);
-            TableName = SetTableName();
+            TableName = context.GetTableName(this.GetType());
         }
+        
         internal EntityStructure GetEntityStructure(TEntity entity)
         {
             return new EntityStructure(entity);

@@ -6,14 +6,14 @@ namespace SQLHelper
     {
         private readonly SqlConnection _connection;
         internal SqlConnection GetConnection() => _connection;
-        private readonly string _connectionString;
-        internal string ConnectionString { get => _connectionString; }
-        public SqlHelperContext(string connectionString)
+        private string _connectionString;
+        public string ConnectionString { internal get => _connectionString; set { this._connectionString = value; } }
+        
+        protected SqlHelperContext()
         {
             _connection = new SqlConnection();
-            _connectionString = connectionString;
+            _connectionString = string.Empty;
         }
-        
         internal void Connect()
         {
             if (_connection.State == System.Data.ConnectionState.Closed)
@@ -30,10 +30,18 @@ namespace SQLHelper
                 return;
             }
         }
+        internal string GetTableName(Type helperTableType)
+        {
+            return this.GetType().GetProperties().Single(p => p.PropertyType == helperTableType).Name;
+        }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (_connection is not null)
+            {
+                Disconnect();
+                _connection.Dispose();
+            }
         }
     }
 }

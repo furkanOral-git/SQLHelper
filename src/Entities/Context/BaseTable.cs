@@ -12,10 +12,8 @@ namespace SQLHelper.Entities.Context
         {
             Context = context;
         }
-        protected string SetTableName()
-        {
-            return default;
-        }
+        
+
 
 
 
