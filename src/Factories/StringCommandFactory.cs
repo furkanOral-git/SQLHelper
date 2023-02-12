@@ -56,10 +56,19 @@ namespace SQLHelper.Factories
             return command.ToString();
         }
         //SELECT * FROM WHERE {entity.Column}={entity.Column.Value} ...
-        public static string CreateGetbyCommand<TEntity>(Expression<Func<TEntity, bool>> predicate, HelperTable<TEntity> table)
+        public static string CreateGetbyCommand<TEntity>(Expression<Func<TEntity, bool>>? predicate, HelperTable<TEntity> table)
         where TEntity : class, IDbEntity
         {
             StringBuilder command = new StringBuilder();
+            if (predicate is null)
+            {
+                command.AppendFormat
+                (
+                    "SELECT * FROM {0}"
+                    , table.TableName
+                );
+                return command.ToString();
+            }
             var predicateBodyStructure = table.GetPredicateBodyStructure(predicate);
             string conditions = "";
             predicateBodyStructure.ResolveBody(ref conditions);
