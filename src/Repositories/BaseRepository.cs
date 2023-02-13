@@ -37,7 +37,7 @@ namespace SQLHelper.Repositories
 
         public IList<TEntity>? GetAllBy(Expression<Func<TEntity, bool>>? predicate = null)
         {
-            var command = StringCommandFactory.CreateGetbyCommand<TEntity>(predicate ?? null, _table);
+            var command = StringCommandFactory.CreateGetbyCommand<TEntity>(predicate, _table);
             IList<TEntity>? results = null;
 
             using (var cmd = new SqlCommand(command, _connection))
