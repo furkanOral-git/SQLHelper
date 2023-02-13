@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
@@ -7,7 +8,7 @@ using SQLHelper.Factories;
 namespace SQLHelper.Repositories
 {
     internal class BaseRepository<TEntity> : IBaseRepository<TEntity>
-    where TEntity : class, IDbEntity
+    where TEntity : class, IDbEntity, new()
     {
         private readonly HelperTable<TEntity> _table;
         private readonly SqlConnection _connection;
@@ -34,34 +35,57 @@ namespace SQLHelper.Repositories
             }
         }
 
-        public IList<TEntity> GetAllBy(Expression<Func<TEntity, bool>>? predicate = null)
+        public IList<TEntity>? GetAllBy(Expression<Func<TEntity, bool>>? predicate = null)
         {
             var command = StringCommandFactory.CreateGetbyCommand<TEntity>(predicate ?? null, _table);
+            IList<TEntity>? results = null;
+
             using (var cmd = new SqlCommand(command, _connection))
             {
-                //read datas
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
+
+                    results ??= new List<TEntity>();
+                    results.Add(entity);
+                }
+                reader.Close();
             }
-            return default;
+            return results;
         }
 
-        public TEntity GetBy(Expression<Func<TEntity, bool>> predicate)
+        public TEntity? GetBy(Expression<Func<TEntity, bool>> predicate)
         {
             var command = StringCommandFactory.CreateGetbyCommand<TEntity>(predicate, _table);
+            TEntity? entity = null;
             using (var cmd = new SqlCommand(command, _connection))
             {
-                //read data
+                var reader = cmd.ExecuteReader();
+                entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
             }
-            return default;
+            return entity;
         }
 
-        public IList<TEntity> SearchLike(Expression<Func<TEntity, bool>> predicate)
+        public IList<TEntity>? SearchLike(Expression<Func<TEntity, bool>> predicate)
         {
             var command = StringCommandFactory.CreateSearchCommand<TEntity>(predicate, _table);
+            IList<TEntity>? results = null;
+
             using (var cmd = new SqlCommand(command, _connection))
             {
-                //read datas
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    results ??= new List<TEntity>();
+                    results.Add(entity);
+                }
+                reader.Close();
             }
-            return default;
+            return results;
         }
 
         public void Update(TEntity entity)

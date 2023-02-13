@@ -8,7 +8,7 @@ namespace SQLHelper
         internal SqlConnection GetConnection() => _connection;
         private string _connectionString;
         public string ConnectionString { internal get => _connectionString; set { this._connectionString = value; } }
-        
+
         protected SqlHelperContext()
         {
             _connection = new SqlConnection();
@@ -30,9 +30,13 @@ namespace SQLHelper
                 return;
             }
         }
-        internal string GetTableName(Type helperTableType)
+        internal (string tableName, string[] columnNames) GetTableMetaData(Type helperTableType)
         {
-            return this.GetType().GetProperties().Single(p => p.PropertyType == helperTableType).Name;
+            var properties = this.GetType().GetProperties();
+            var propertyNames = properties.Select(p => p.Name).ToArray();
+            var tableName = properties.Single(p => p.PropertyType == helperTableType).Name;
+            
+            return (tableName, propertyNames);
         }
 
         public void Dispose()

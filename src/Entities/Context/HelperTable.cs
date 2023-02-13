@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq.Expressions;
+using System.Net;
 using SQLHelper.Entities.Context;
 using SQLHelper.Entities.Structs;
 using SQLHelper.Repositories;
@@ -7,14 +8,12 @@ using SQLHelper.Repositories;
 namespace SQLHelper.Entities.Context
 {
     public sealed class HelperTable<TEntity> : BaseTable
-    where TEntity : class, IDbEntity
+    where TEntity : class, IDbEntity, new()
     {
         internal BaseRepository<TEntity> Repository { get; init; }
-
         public HelperTable(SqlHelperContext context) : base(context)
         {
             Repository = new BaseRepository<TEntity>(this);
-            TableName = context.GetTableName(this.GetType());
         }
         
         internal EntityStructure GetEntityStructure(TEntity entity)
