@@ -11,12 +11,11 @@ namespace SQLHelper.Repositories
     where TEntity : class, IDbEntity, new()
     {
         private readonly HelperTable<TEntity> _table;
-        private readonly SqlConnection _connection;
-        private static BaseRepository<TEntity> _instance;
+        private static BaseRepository<TEntity>? _instance;
+
         private BaseRepository(HelperTable<TEntity> table)
         {
             _table = table;
-            _connection = table.Context.GetConnection();
         }
         public static BaseRepository<TEntity> GetRepo(HelperTable<TEntity> table)
         {
@@ -25,7 +24,7 @@ namespace SQLHelper.Repositories
         public void Insert(TEntity entity)
         {
             var command = StringCommandFactory.CreateInsertCommand<TEntity>(entity, _table);
-            using (var cmd = new SqlCommand(command, _connection))
+            using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
                 cmd.ExecuteNonQuery();
             }
@@ -34,7 +33,7 @@ namespace SQLHelper.Repositories
         public void RemoveBy(Expression<Func<TEntity, bool>> predicate)
         {
             var command = StringCommandFactory.CreateRemoveByCommand<TEntity>(predicate, _table);
-            using (var cmd = new SqlCommand(command, _connection))
+            using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
                 cmd.ExecuteNonQuery();
             }
@@ -45,7 +44,7 @@ namespace SQLHelper.Repositories
             var command = StringCommandFactory.CreateGetbyCommand<TEntity>(predicate, _table);
             IList<TEntity>? results = null;
 
-            using (var cmd = new SqlCommand(command, _connection))
+            using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
                 var reader = cmd.ExecuteReader();
 
@@ -65,7 +64,7 @@ namespace SQLHelper.Repositories
         {
             var command = StringCommandFactory.CreateGetbyCommand<TEntity>(predicate, _table);
             TEntity? entity = null;
-            using (var cmd = new SqlCommand(command, _connection))
+            using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
                 var reader = cmd.ExecuteReader();
                 entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
@@ -78,7 +77,7 @@ namespace SQLHelper.Repositories
             var command = StringCommandFactory.CreateSearchCommand<TEntity>(predicate, _table);
             IList<TEntity>? results = null;
 
-            using (var cmd = new SqlCommand(command, _connection))
+            using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
                 var reader = cmd.ExecuteReader();
 
@@ -96,10 +95,12 @@ namespace SQLHelper.Repositories
         public void Update(TEntity entity)
         {
             var command = StringCommandFactory.CreateUpdateCommand<TEntity>(entity, _table);
-            using (var cmd = new SqlCommand(command, _connection))
+            using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
                 cmd.ExecuteNonQuery();
             }
         }
+
+
     }
 }
