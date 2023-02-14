@@ -12,10 +12,15 @@ namespace SQLHelper.Repositories
     {
         private readonly HelperTable<TEntity> _table;
         private readonly SqlConnection _connection;
-        public BaseRepository(HelperTable<TEntity> table)
+        private static BaseRepository<TEntity> _instance;
+        private BaseRepository(HelperTable<TEntity> table)
         {
             _table = table;
             _connection = table.Context.GetConnection();
+        }
+        public static BaseRepository<TEntity> GetRepo(HelperTable<TEntity> table)
+        {
+            return _instance ??= new BaseRepository<TEntity>(table);
         }
         public void Insert(TEntity entity)
         {

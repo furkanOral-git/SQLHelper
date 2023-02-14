@@ -11,11 +11,15 @@ namespace SQLHelper.Entities.Context
     where TEntity : class, IDbEntity, new()
     {
         internal BaseRepository<TEntity> Repository { get; init; }
-        public HelperTable(SqlHelperContext context) : base(context)
+        private static HelperTable<TEntity> _instance;
+        private HelperTable(SqlHelperContext context) : base(context)
         {
-            Repository = new BaseRepository<TEntity>(this);
+            Repository = BaseRepository<TEntity>.GetRepo(this);
         }
-        
+        public static HelperTable<TEntity> GetTable(SqlHelperContext context)
+        {
+            return _instance ??= new HelperTable<TEntity>(context);
+        }
         internal EntityStructure GetEntityStructure(TEntity entity)
         {
             return new EntityStructure(entity);
