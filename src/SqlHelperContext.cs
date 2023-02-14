@@ -6,13 +6,21 @@ namespace SQLHelper
     {
         private readonly SqlConnection _connection;
         internal SqlConnection GetConnection() => _connection;
-        private string _connectionString;
-        public string ConnectionString { internal get => _connectionString; set { this._connectionString = value; } }
+        public string ConnectionString
+        {
+            internal get
+            {
+                return _connection.ConnectionString;
+            }
+            set
+            {
+                _connection.ConnectionString = value;
+            }
+        }
 
         protected SqlHelperContext()
         {
             _connection = new SqlConnection();
-            _connectionString = string.Empty;
         }
         internal void Connect()
         {
@@ -35,7 +43,7 @@ namespace SQLHelper
             var properties = this.GetType().GetProperties();
             var propertyNames = properties.Select(p => p.Name).ToArray();
             var tableName = properties.Single(p => p.PropertyType == helperTableType).Name;
-            
+
             return (tableName, propertyNames);
         }
 
