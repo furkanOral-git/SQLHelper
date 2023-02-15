@@ -19,11 +19,12 @@ namespace SQLHelper.Entities.Structs
         {
             _entity = entity;
             _entityType = entity.GetType();
-            _properties = _entityType.GetProperties().Where(p => p.PropertyType.IsValueType).ToArray();
+            // Bug var aşağıdaki kodda
+            _properties = _entityType.GetProperties().Where(p => p.PropertyType.IsValueType || p.PropertyType == typeof(string)).ToArray();
         }
         public (string names, string values) GetNamesAndValuesSeparately()
         {
-            
+
             StringBuilder names = new StringBuilder();
             StringBuilder values = new StringBuilder();
 
