@@ -12,7 +12,7 @@ namespace SQLHelper.Entities.Structs
 
         public PredicateBodyStructure(Expression<Func<TEntity, bool>> predicate) : this((BinaryExpression)predicate.Body)
         {
-
+            
         }
         private PredicateBodyStructure(BinaryExpression binaryExpression)
         {

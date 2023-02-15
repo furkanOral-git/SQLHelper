@@ -32,11 +32,11 @@ namespace SQLHelper.Entities.Structs
             switch (methodName)
             {
                 case "Contains":
-                    return "%" + pattern + "%";
+                    return "'%" + pattern + "%'";
                 case "StartsWith":
-                    return pattern + "%";
+                    return "'" + pattern + "%'";
                 case "EndsWith":
-                    return "%" + pattern;
+                    return "'%" + pattern + "'";
                 default:
                     return string.Empty;
             }

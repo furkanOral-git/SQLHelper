@@ -40,9 +40,10 @@ namespace SQLHelper
         }
         internal (string tableName, string[] columnNames) GetTableMetaData(Type helperTableType)
         {
-            var properties = this.GetType().GetProperties();
+            var entityType = helperTableType.GetGenericArguments()[0];
+            var properties = entityType.GetProperties();
             var propertyNames = properties.Select(p => p.Name).ToArray();
-            var tableName = properties.Single(p => p.PropertyType == helperTableType).Name;
+            var tableName = this.GetType().GetProperties().Single(p=>p.PropertyType == helperTableType).Name;
 
             return (tableName, propertyNames);
         }

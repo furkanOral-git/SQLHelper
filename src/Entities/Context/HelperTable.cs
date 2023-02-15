@@ -12,6 +12,7 @@ namespace SQLHelper.Entities.Context
     {
         internal BaseRepository<TEntity> Repository { get; init; }
         private static HelperTable<TEntity> _instance;
+        
         private HelperTable(SqlHelperContext context) : base(context)
         {
             Repository = BaseRepository<TEntity>.GetRepo(this);
