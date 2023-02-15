@@ -68,7 +68,10 @@ namespace SQLHelper.Repositories
             using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
                 var reader = cmd.ExecuteReader();
-                entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                if (reader.Read())
+                {
+                    entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                }
             }
             return entity;
         }
