@@ -27,7 +27,9 @@ namespace SQLHelper.Repositories
             System.Console.WriteLine(command);
             using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
+                _table.Context.Connect();
                 cmd.ExecuteNonQuery();
+                _table.Context.Disconnect();
             }
         }
 
@@ -36,7 +38,9 @@ namespace SQLHelper.Repositories
             var command = StringCommandFactory.CreateRemoveByCommand<TEntity>(predicate, _table);
             using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
+                _table.Context.Connect();
                 cmd.ExecuteNonQuery();
+                _table.Context.Disconnect();
             }
         }
 
@@ -47,6 +51,7 @@ namespace SQLHelper.Repositories
 
             using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
+                _table.Context.Connect();
                 var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -57,6 +62,7 @@ namespace SQLHelper.Repositories
                     results.Add(entity);
                 }
                 reader.Close();
+                _table.Context.Disconnect();
             }
             return results;
         }
@@ -67,11 +73,16 @@ namespace SQLHelper.Repositories
             TEntity? entity = null;
             using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
+                _table.Context.Connect();
+
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
                     entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
                 }
+                reader.Close();
+                _table.Context.Disconnect();
+
             }
             return entity;
         }
@@ -83,6 +94,7 @@ namespace SQLHelper.Repositories
 
             using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
+                _table.Context.Connect();
                 var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -92,6 +104,7 @@ namespace SQLHelper.Repositories
                     results.Add(entity);
                 }
                 reader.Close();
+                _table.Context.Disconnect();
             }
             return results;
         }
@@ -101,7 +114,9 @@ namespace SQLHelper.Repositories
             var command = StringCommandFactory.CreateUpdateCommand<TEntity>(entity, _table);
             using (var cmd = new SqlCommand(command, _table.Context.GetConnection()))
             {
+                _table.Context.Connect();
                 cmd.ExecuteNonQuery();
+                _table.Context.Disconnect();
             }
         }
 

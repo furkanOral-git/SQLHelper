@@ -1,10 +1,11 @@
+using System.Data;
 using System.Data.SqlClient;
 
 namespace SQLHelper
 {
     public abstract class SqlHelperContext : IDisposable
     {
-        private readonly SqlConnection _connection;
+        protected readonly SqlConnection _connection;
         internal SqlConnection GetConnection() => _connection;
         public string ConnectionString
         {
@@ -17,14 +18,14 @@ namespace SQLHelper
                 _connection.ConnectionString = value;
             }
         }
-
-        protected SqlHelperContext()
+        public SqlHelperContext()
         {
             _connection = new SqlConnection();
         }
+        
         internal void Connect()
         {
-            if (_connection.State == System.Data.ConnectionState.Closed)
+            if (_connection.State == ConnectionState.Closed)
             {
                 _connection.Open();
                 return;
@@ -32,7 +33,7 @@ namespace SQLHelper
         }
         internal void Disconnect()
         {
-            if (_connection.State == System.Data.ConnectionState.Open)
+            if (_connection.State == ConnectionState.Open)
             {
                 _connection.Close();
                 return;
@@ -43,7 +44,7 @@ namespace SQLHelper
             var entityType = helperTableType.GetGenericArguments()[0];
             var properties = entityType.GetProperties();
             var propertyNames = properties.Select(p => p.Name).ToArray();
-            var tableName = this.GetType().GetProperties().Single(p=>p.PropertyType == helperTableType).Name;
+            var tableName = this.GetType().GetProperties().Single(p => p.PropertyType == helperTableType).Name;
 
             return (tableName, propertyNames);
         }

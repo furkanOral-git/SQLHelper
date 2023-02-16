@@ -23,7 +23,7 @@ namespace SQLHelper.Entities.Structs
             {
                 return string.Format("'{0}'", _value);
             }
-            return string.Format("{0}", _value);
+            return string.Format("{0}", _value).Replace(",", "");
         }
     }
 }
