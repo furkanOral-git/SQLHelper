@@ -11,15 +11,13 @@ namespace SQLHelper.Repositories
     where TEntity : class, IDbEntity, new()
     {
         private readonly HelperTable<TEntity> _table;
-        private static BaseRepository<TEntity>? _instance;
-
         private BaseRepository(HelperTable<TEntity> table)
         {
             _table = table;
         }
-        public static BaseRepository<TEntity> GetRepo(HelperTable<TEntity> table)
+        public static BaseRepository<TEntity> CreateInstance(HelperTable<TEntity> table)
         {
-            return _instance ??= new BaseRepository<TEntity>(table);
+            return new BaseRepository<TEntity>(table);
         }
         public void Insert(TEntity entity)
         {

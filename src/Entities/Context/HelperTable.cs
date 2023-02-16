@@ -14,7 +14,7 @@ namespace SQLHelper.Entities.Context
 
         private HelperTable(SqlHelperContext context) : base(context)
         {
-            Repository = BaseRepository<TEntity>.GetRepo(this);
+            Repository = BaseRepository<TEntity>.CreateInstance(this);
         }
         public static HelperTable<TEntity> CreateInstance(SqlHelperContext context)
         {
