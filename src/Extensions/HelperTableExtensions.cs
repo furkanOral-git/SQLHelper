@@ -34,17 +34,13 @@ namespace SQLHelper
         public static IList<TEntity>? GetAllBy<TEntity>(this HelperTable<TEntity> table, Expression<Func<TEntity, bool>>? predicate = null)
         where TEntity : class, IDbEntity, new()
         {
-            table.Context.Connect();
             var result = table.Repository.GetAllBy(predicate);
-            table.Context.Disconnect();
             return result;
         }
         public static IList<TEntity>? SearchLike<TEntity>(this HelperTable<TEntity> table, Expression<Func<TEntity, bool>> predicate)
         where TEntity : class, IDbEntity, new()
         {
-            table.Context.Connect();
             var result = table.Repository.SearchLike(predicate);
-            table.Context.Disconnect();
             return result;
         }
     }

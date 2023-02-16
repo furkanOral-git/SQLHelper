@@ -5,7 +5,7 @@ namespace SQLHelper
 {
     public abstract class SqlHelperContext : IDisposable
     {
-        protected readonly SqlConnection _connection;
+        private readonly SqlConnection _connection;
         internal SqlConnection GetConnection() => _connection;
         public string ConnectionString
         {
