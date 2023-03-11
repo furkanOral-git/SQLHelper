@@ -9,7 +9,7 @@ namespace SQLHelper.Factories
 
         //INSERT INTO {TABLE} ({entity.columnNames}) values (entity.columnValues)
         public static string CreateInsertCommand<TEntity>(TEntity entity, HelperTable<TEntity> table)
-        where TEntity : class, IDbEntity, new()
+        where TEntity : class, IDbEntity
         {
             StringBuilder command = new StringBuilder();
             var entityStructure = table.GetEntityStructure(entity);
@@ -26,7 +26,7 @@ namespace SQLHelper.Factories
         }
         //UPDATE {TABLE} SET {entity.Column}={entity.Column.Value}, ... WHERE {entity.Column}={entity.Column.Value}
         public static string CreateUpdateCommand<TEntity>(TEntity entity, HelperTable<TEntity> table)
-        where TEntity : class, IDbEntity, new()
+        where TEntity : class, IDbEntity
         {
             StringBuilder command = new StringBuilder();
             var entityStructure = table.GetEntityStructure(entity);
@@ -41,7 +41,7 @@ namespace SQLHelper.Factories
         }
         //DELETE FROM {TABLE} WHERE {entity.Column}={entity.Column.Value}
         public static string CreateRemoveByCommand<TEntity>(Expression<Func<TEntity, bool>> predicate, HelperTable<TEntity> table)
-        where TEntity : class, IDbEntity, new()
+        where TEntity : class, IDbEntity
         {
             StringBuilder command = new StringBuilder();
             var predicateBodyStructure = table.GetPredicateBodyStructure(predicate);
@@ -57,7 +57,7 @@ namespace SQLHelper.Factories
         }
         //SELECT * FROM WHERE {entity.Column}={entity.Column.Value} ...
         public static string CreateGetbyCommand<TEntity>(Expression<Func<TEntity, bool>>? predicate, HelperTable<TEntity> table)
-        where TEntity : class, IDbEntity, new()
+        where TEntity : class, IDbEntity
         {
             StringBuilder command = new StringBuilder();
             if (predicate is null)
@@ -82,7 +82,7 @@ namespace SQLHelper.Factories
         }
         //SELECT * FROM WHERE {entity.Column} LIKE {pattern}%
         public static string CreateSearchCommand<TEntity>(Expression<Func<TEntity, bool>> predicate, HelperTable<TEntity> table)
-        where TEntity : class, IDbEntity, new()
+        where TEntity : class, IDbEntity
         {
             StringBuilder command = new StringBuilder();
             var predicateBodyStructure = table.GetPredicateBodyStructure(predicate);

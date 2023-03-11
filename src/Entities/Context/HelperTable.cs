@@ -8,7 +8,7 @@ using SQLHelper.Repositories;
 namespace SQLHelper.Entities.Context
 {
     public sealed class HelperTable<TEntity> : BaseTable
-    where TEntity : class, IDbEntity, new()
+    where TEntity : class, IDbEntity
     {
         internal BaseRepository<TEntity> Repository { get; init; }
 

@@ -8,7 +8,7 @@ using SQLHelper.Factories;
 namespace SQLHelper.Repositories
 {
     internal class BaseRepository<TEntity> : IBaseRepository<TEntity>
-    where TEntity : class, IDbEntity, new()
+    where TEntity : class, IDbEntity
     {
         private readonly HelperTable<TEntity> _table;
         private BaseRepository(HelperTable<TEntity> table)
@@ -54,7 +54,7 @@ namespace SQLHelper.Repositories
 
                 while (reader.Read())
                 {
-                    var entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    var entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
 
                     results ??= new List<TEntity>();
                     results.Add(entity);
@@ -76,7 +76,7 @@ namespace SQLHelper.Repositories
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
                 }
                 reader.Close();
                 _table.Context.Disconnect();
@@ -97,7 +97,7 @@ namespace SQLHelper.Repositories
 
                 while (reader.Read())
                 {
-                    var entity = EntityFactory.CreateEntityWithReader<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    var entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
                     results ??= new List<TEntity>();
                     results.Add(entity);
                 }

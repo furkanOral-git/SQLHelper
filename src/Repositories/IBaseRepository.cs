@@ -8,7 +8,7 @@ using SQLHelper.Entities.Context;
 namespace SQLHelper.Repositories
 {
     public interface IBaseRepository<TEntity>
-    where TEntity:class,IDbEntity,new()
+    where TEntity:class,IDbEntity
     {
         public void Insert(TEntity entity);
         public void RemoveBy(Expression<Func<TEntity, bool>> predicate);
