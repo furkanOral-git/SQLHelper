@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
@@ -54,8 +55,15 @@ namespace SQLHelper.Repositories
 
                 while (reader.Read())
                 {
-                    var entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
-                    
+                    TEntity? entity;
+                    if (_table.ConstructorArgTypes.Length == 0)
+                    {
+                        entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    }
+                    else
+                    {
+                        entity = EntityFactory.CreateEntityWithParameters<TEntity>((IDataRecord)reader, _table.ConstructorArgTypes, _table.ColumnNames);
+                    }
                     results ??= new List<TEntity>();
                     results.Add(entity);
                 }
@@ -76,7 +84,15 @@ namespace SQLHelper.Repositories
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    
+                    if (_table.ConstructorArgTypes.Length == 0)
+                    {
+                        entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    }
+                    else
+                    {
+                        entity = EntityFactory.CreateEntityWithParameters<TEntity>((IDataRecord)reader, _table.ConstructorArgTypes, _table.ColumnNames);
+                    }
                 }
                 reader.Close();
                 _table.Context.Disconnect();
@@ -97,7 +113,15 @@ namespace SQLHelper.Repositories
 
                 while (reader.Read())
                 {
-                    var entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    TEntity? entity;
+                    if (_table.ConstructorArgTypes.Length == 0)
+                    {
+                        entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
+                    }
+                    else
+                    {
+                        entity = EntityFactory.CreateEntityWithParameters<TEntity>((IDataRecord)reader, _table.ConstructorArgTypes, _table.ColumnNames);
+                    }
                     results ??= new List<TEntity>();
                     results.Add(entity);
                 }
