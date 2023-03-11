@@ -33,20 +33,27 @@ namespace SQLHelper.Factories
 
             return entity;
         }
-        public static TEntity CreateEntityWithParameters<TEntity>(IDataRecord record, Type[] ctorArgTypes, string[] propertyNames)
+        public static TEntity? CreateEntityWithParameters<TEntity>(IDataRecord record, Type[] ctorArgTypes, string[] propertyNames)
         where TEntity : class, IDbEntity
         {
             IList<object?> args = (IList<object?>)Enumerable.Empty<object>();
-
+            int id = -1;
             for (int i = 0; i < propertyNames.Length; i++)
             {
-                args.Add(GetValue(record, propertyNames[i]));
+                var value = GetValue(record, propertyNames[i]);
+                if (propertyNames[i] == "Id")
+                {
+                    id = Convert.ToInt32(value);
+                    continue;
+                }
+                args.Add(value);
             }
             var argsArr = args.ToArray();
             orderArgsByTypeOrder(argsArr);
-
-
-            return (TEntity)Activator.CreateInstance(typeof(TEntity), argsArr);
+            TEntity? entity = (TEntity?)Activator.CreateInstance(typeof(TEntity), argsArr);
+            if (entity is not null) entity.Id = id;
+            
+            return entity;
 
             void orderArgsByTypeOrder(object?[] args)
             {
