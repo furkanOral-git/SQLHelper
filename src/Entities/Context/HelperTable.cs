@@ -11,7 +11,7 @@ namespace SQLHelper.Entities.Context
     where TEntity : class, IDbEntity
     {
         internal BaseRepository<TEntity> Repository { get; init; }
-
+        
         private HelperTable(SqlHelperContext context) : base(context)
         {
             Repository = BaseRepository<TEntity>.CreateInstance(this);

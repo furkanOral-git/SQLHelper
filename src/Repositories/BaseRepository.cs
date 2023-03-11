@@ -55,7 +55,7 @@ namespace SQLHelper.Repositories
                 while (reader.Read())
                 {
                     var entity = EntityFactory.CreateEntityWithNoParameter<TEntity>((IDataRecord)reader, _table.ColumnNames);
-
+                    
                     results ??= new List<TEntity>();
                     results.Add(entity);
                 }

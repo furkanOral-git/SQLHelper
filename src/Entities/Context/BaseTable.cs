@@ -9,16 +9,19 @@ namespace SQLHelper.Entities.Context
         internal SqlHelperContext Context { get; init; }
         internal string TableName { get; init; }
         internal string[] ColumnNames { get; init; }
-        
+        internal Type[] ConstructorArgTypes { get; init; }
+
 
         internal BaseTable(SqlHelperContext context)
         {
             Context = context;
-            var data = context.GetTableMetaData(this.GetType());
+            var tableType = this.GetType();
+            var data = context.GetTableMetaData(tableType);
+            ConstructorArgTypes = data.ctorArgTypes;
             TableName = data.tableName;
             ColumnNames = data.columnNames;
         }
-        
+
 
 
 
