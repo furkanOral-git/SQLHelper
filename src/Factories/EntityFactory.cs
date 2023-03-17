@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
 using SQLHelper.Entities.Context;
 
 namespace SQLHelper.Factories
