@@ -23,7 +23,11 @@ namespace SQLHelper.Data
             .SingleOrDefault(p => p.PropertyType.IsEquivalentTo(typeof(HelperTable<TEntity>)))?
             .Name;
 
+            var tableType = typeof(HelperTable<TEntity>);
             var collection = new MetaDataCollection(tableName, propertyNames, constructorArgTypes);
+            
+            if (!_datas.ContainsKey(tableType)) _datas.Add(tableType, collection);
+
         }
         public static string GetTableName<TEntity>()
         where TEntity : class, IDbEntity
