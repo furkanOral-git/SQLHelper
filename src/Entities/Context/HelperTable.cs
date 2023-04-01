@@ -14,8 +14,8 @@ namespace SQLHelper.Entities.Context
         }
         public static HelperTable<TEntity> CreateInstance(SqlHelperContext context)
         {
-            var table = new HelperTable<TEntity>(context);
             MetaDataProvider.RegisterTable<TEntity>(context.GetType());
+            var table = new HelperTable<TEntity>(context);
             return table;
         }
         
