@@ -31,7 +31,7 @@ namespace SQLHelper.Factories
         public static TEntity CreateEntityWithParameters<TEntity>(IDataRecord record, Type[] ctorArgTypes, string[] propertyNames)
         where TEntity : class, IDbEntity
         {
-            IList<object?> args = (IList<object?>)Enumerable.Empty<object>();
+            IList<object?> args = new List<object?>();
             int id = -1;
             for (int i = 0; i < propertyNames.Length; i++)
             {
@@ -56,7 +56,7 @@ namespace SQLHelper.Factories
 
                 for (int i = 0; i < ctorArgTypes.Length; i++)
                 {
-                    var IsSameType = ctorArgTypes[i].Equals(args[i]);
+                    var IsSameType = ctorArgTypes[i].IsEquivalentTo(args[i]?.GetType());
                     if (!IsSameType)
                     {
                         object? temp = null;
