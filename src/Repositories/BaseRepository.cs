@@ -27,7 +27,7 @@ namespace SQLHelper.Repositories
         public void Insert(TEntity entity)
         {
             var command = StringCommandFactory.CreateInsertCommand<TEntity>(entity);
-            System.Console.WriteLine(command);
+            
             using (var cmd = new SqlCommand(command, _context.GetConnection()))
             {
                 _context.Connect();
